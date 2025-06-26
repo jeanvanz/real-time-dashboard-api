@@ -3,12 +3,7 @@ import psutil
 import time
 import json
 
-r = redis.Redis(
-    host='redis-17263.c10.us-east-1-4.ec2.redns.redis-cloud.com',
-    port=17263,
-    password='MtAMMqqMoWwrmwe6bvmQ9b38Sj4yA4Yj',
-    ssl=False
-)
+r = redis.Redis(**REDIS_CONFIG)
 
 while True:
     data = {
