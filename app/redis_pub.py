@@ -2,6 +2,7 @@ import redis
 import psutil
 import time
 import json
+from config.redis_config import REDIS_CONFIG
 
 r = redis.Redis(**REDIS_CONFIG)
 
