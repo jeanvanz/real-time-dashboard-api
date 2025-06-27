@@ -2,7 +2,7 @@ import asyncio
 import tornado.websocket
 import tornado.web
 from websocket_handler import WebSocketHandler, connected_clients
-from redis_listener import RedisListener
+from redis_listener import listener_redis
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -39,17 +39,12 @@ async def main():
     print("Server rodando")
     print("Interface web em: http://localhost:8888")
     
-    redis_listener = RedisListener()
-    
-    redis_task = asyncio.create_task(
-        redis_listener.listen_for_messages(handle_redis_message)
-    )
+    redis_task = asyncio.create_task(listener_redis(handle_redis_message))
     
     try:
         await asyncio.Event().wait()
     except KeyboardInterrupt:
         print("\nEncerrando servidor...")
-        redis_listener.close()
         redis_task.cancel()
 
 if __name__ == "__main__":
