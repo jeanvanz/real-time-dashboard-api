@@ -101,6 +101,10 @@
             color: #FF9800;
         }
 
+        .disk-metric {
+            color: #00ff00;
+        }
+
         .progress-bar {
             width: 100%;
             height: 20px;
@@ -122,6 +126,10 @@
 
         .ram-progress {
             background: linear-gradient(90deg, #FF9800, #FFC107);
+        }
+
+        .disk-progress {
+            background: linear-gradient(90deg, #00ff00, #6ef56e);
         }
 
         .log-container {
@@ -192,6 +200,17 @@
                 <div id="ramValue" class="metric ram-metric">0%</div>
                 <div class="progress-bar">
                     <div id="ramProgress" class="progress-fill ram-progress" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <span>💾</span>
+                    DISK Usage
+                </div>
+                <div id="diskValue" class="metric disk-metric">0%</div>
+                <div class="progress-bar">
+                    <div id="diskProgress" class="progress-fill disk-progress" style="width: 0%"></div>
                 </div>
             </div>
         </div>
@@ -273,8 +292,8 @@
                     }
 
                     if (systemData.cpu !== undefined && systemData.ram !== undefined) {
-                        this.updateMetrics(systemData.cpu, systemData.ram);
-                        this.addLog(`CPU: ${systemData.cpu}% | RAM: ${systemData.ram}%`, 'data');
+                        this.updateMetrics(systemData.cpu, systemData.ram, systemData.disk);
+                        this.addLog(`CPU: ${systemData.cpu}% | RAM: ${systemData.ram}% | DISK: ${systemData.disk}%`, 'data');
                     } else {
                         this.addLog(`Dados recebidos: ${JSON.stringify(systemData)}`, 'info');
                     }
@@ -283,15 +302,18 @@
                 }
             }
 
-            updateMetrics(cpu, ram) {
+            updateMetrics(cpu, ram, disk) {
                 document.getElementById('cpuValue').textContent = `${cpu.toFixed(1)}%`;
                 document.getElementById('ramValue').textContent = `${ram.toFixed(1)}%`;
+                document.getElementById('diskValue').textContent = `${disk.toFixed(1)}%`;
                 
                 document.getElementById('cpuProgress').style.width = `${cpu}%`;
                 document.getElementById('ramProgress').style.width = `${ram}%`;
-                
+                document.getElementById('diskProgress').style.width = `${disk}%`;
+
                 this.addPulseEffect('cpuValue');
                 this.addPulseEffect('ramValue');
+                this.addPulseEffect('diskValue');
             }
 
             addPulseEffect(elementId) {
