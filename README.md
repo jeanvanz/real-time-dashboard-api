@@ -59,12 +59,12 @@ REDIS_PORT=""
 REDIS_PASSWORD=""
 ```
 
-5. Execute os módulos de coleta de dados (redis_pub.py) e o servidor WebSocket (main.py).
+5. Execute os módulos de coleta de dados `redis_pub.py` e o servidor WebSocket `main.py`.
 
 ---
 
 ## 👨‍💻 Desenvolvido por
 
-- **Bernardo Sozo Fattini** — RA: 1134300  
+- **Bernardo Sozo Fattini** - RA: 1134300  
 - **Jean Folle Vanz** - RA: 1134254
 - **Otavio Augusto Lorenzatto** - RA: 1134984
